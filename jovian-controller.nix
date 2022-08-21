@@ -4,14 +4,8 @@
 , fetchFromGitHub
 }:
 let
-  version = "unstable-2022-04-15";
-  src = fetchFromGitHub {
-    repo = "Jovian-Controller";
-    owner = "Jovian-Experiments";
-    rev = "669276f8e6be0ec1277a0c88c561357c65dbdfe0";
-    sha256 = "sha256-vHsq7lQFjjUsSOa+Sbd2AVrLvEj70dcInC44eCYYtXY=";
-  };
-
+  version = "unstable-2022-08-20";
+  src = ./.;
   gems = bundlerEnv {
     name = "Jovian-Controller-env";
     inherit ruby;
