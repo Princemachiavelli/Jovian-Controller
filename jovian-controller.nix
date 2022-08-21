@@ -1,18 +1,28 @@
 { stdenv
 , bundlerEnv
 , ruby
+, fetchFromGitHub
 }:
 let
+  version = "unstable-2022-04-15";
+  src = fetchFromGitHub {
+    repo = "Jovian-Controller";
+    owner = "Jovian-Experiments";
+    rev = "669276f8e6be0ec1277a0c88c561357c65dbdfe0";
+    sha256 = "sha256-vHsq7lQFjjUsSOa+Sbd2AVrLvEj70dcInC44eCYYtXY=";
+  };
+
   gems = bundlerEnv {
     name = "Jovian-Controller-env";
     inherit ruby;
-    gemdir  = ./.;
+    gemdir  = src;
   };
 in stdenv.mkDerivation {
   pname = "Jovian-Controller";
-  version = "unstable-2022-04-15";
 
-  src = builtins.fetchGit ./.;
+  inherit src;
+  inherit version;
+
 
   buildInputs = [
     gems
